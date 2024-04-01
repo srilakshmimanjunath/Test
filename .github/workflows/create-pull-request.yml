@@ -18,5 +18,3 @@ jobs:
           body: Cloud - Update available list
           base: main
           labels: automated-pr, Clouds & Regions
-          branch: cloud-update-advanced-params
-          delete-branch: true
