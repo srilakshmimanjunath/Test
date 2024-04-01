@@ -1,0 +1,10 @@
+on: [push]
+
+name: self-hosted-example
+
+jobs:
+  createPullRequest:
+    runs-on: self-hosted
+    steps:
+    # create pull request
+    - uses: peter-evans/create-pull-request@v6
