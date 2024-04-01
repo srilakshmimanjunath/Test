@@ -1,20 +1,23 @@
-name: Cloud - Create PR to update available list
+name: Update Changelog
 on: [push]
 jobs:
-  CloudList:
+  updateChangelog:
     runs-on: self-hosted
     steps:
-      - name: Checkout the repo
-        uses: actions/checkout@main
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@main
         with:
-          python-version: "3.8"
+          fetch-depth: 0
+      - name: Update Changelog
+        run: |
+          curl -o git-chglog -L https://github.com/git-chglog/git-chglog/releases/download/0.9.1/git-chglog_linux_amd64
+          chmod u+x git-chglog
+          ./git-chglog -o CHANGELOG.md
+          rm git-chglog
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: Cloud - Update available list
-          title: Cloud - Update available list
-          body: Cloud - Update available list
+          commit-message: update changelog
+          title: Update Changelog
+          body: Update changelog to reflect release changes
+          branch: update-changelog
           base: main
-          labels: automated-pr, Clouds & Regions
