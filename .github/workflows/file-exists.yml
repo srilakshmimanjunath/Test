@@ -1,0 +1,18 @@
+name: file-exists
+on: [push]
+jobs:
+  check-file-exists:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Check file existence
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "report.txt, README.md"
+          allow_failure: true
+      - name: File exists
+        if: steps.check_files.outputs.files_exists == 'true'
+        # Only runs if all of the files exists
+        run: echo All files exist.
