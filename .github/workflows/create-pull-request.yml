@@ -1,7 +1,5 @@
 name: Cloud - Create PR to update available list
-on:
-  schedule:
-    - cron: "* * * * *"
+on: [push]
 jobs:
   CloudList:
     runs-on: self-hosted
